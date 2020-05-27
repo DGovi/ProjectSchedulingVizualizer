@@ -27,17 +27,27 @@ class LinkedList():
     def __init__(self):
         self.head = None
 
-    def add_activity_to_end_of_list(self, duration_of_activity, name_of_activity):
+    def add_at_start(self, duration_of_activity, name_of_activity):
+        new_activity = Activity(duration_of_activity, name_of_activity)
+        new_activity.next = self.head
+        self.head = new_activity
+
+    def add_at_end(self, duration_of_activity, name_of_activity):
         current_activity = self.head
         while current_activity.next is not None:
             current_activity = current_activity.next
         current_activity.next = Activity(
             duration_of_activity, name_of_activity)
 
-    def add_at_start(self, duration_of_activity, name_of_activity):
-        new_activity = Activity(4, "D")
-        new_activity.next = self.head
-        self.head = new_activity
+    def add_after_specified(self, specified_name, duration_of_activity, name_of_activity):
+        current_activity = self.head
+
+        while current_activity.next is not None:
+            if current_activity.name == specified_name:
+                new_activity = Activity(duration_of_activity, name_of_activity)
+                new_activity.next = current_activity.next
+                current_activity.next = new_activity
+            current_activity = current_activity.next
 
     def print_list(self):
         activitylist = ""
@@ -58,8 +68,9 @@ class LinkedList():
 
 schedule = LinkedList()
 schedule.head = Activity(5, "A")
-schedule.add_activity_to_end_of_list(3, "B")
-schedule.add_activity_to_end_of_list(5, "C")
+schedule.add_at_end(3, "B")
+schedule.add_at_end(5, "C")
 schedule.add_at_start(4, "D")
+schedule.add_after_specified("A", 4, "E")
 
 schedule.print_list()
