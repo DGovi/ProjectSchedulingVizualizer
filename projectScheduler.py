@@ -60,6 +60,6 @@ schedule = LinkedList()
 schedule.head = Activity(5, "A")
 schedule.add_activity_to_end_of_list(3, "B")
 schedule.add_activity_to_end_of_list(5, "C")
-schedule.add_at_start(4, "d")
+schedule.add_at_start(4, "D")
 
 schedule.print_list()
